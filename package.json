@@ -1,0 +1,26 @@
+{
+  "name": "mysimplekeyboard",
+  "version": "1.0.0",
+  "description": "My Keyboard: interactive personal website.",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "leveldown": "^1.5.0",
+    "levelup": "^1.3.2",
+    "pug": "^0.1.0",
+    "socket.io": "^1.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ellenwang95/MySimpleKeyboard.git"
+  },
+  "author": "Ellen Wang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ellenwang95/MySimpleKeyboard/issues"
+  },
+  "homepage": "https://github.com/ellenwang95/MySimpleKeyboard#readme"
+}

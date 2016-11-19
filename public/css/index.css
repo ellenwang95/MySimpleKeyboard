@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body, input {
+  font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 18.5714px;
+  text-align: center;
+}
+
+div.centertext {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+}
+
+div.bottomlefttext {
+  height: 178%;
+  width: 40%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+}
