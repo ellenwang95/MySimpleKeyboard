@@ -14,7 +14,7 @@ socket.on('update', function (retrievedentry) {
 	if(error(retrievedentry)) {
 		return;
 	}
-	entry = retrievedentry[0].value;
+	entry = retrievedentry[0];
 	var linkhref = entry.link ? entry.link : "";
     var linktext = entry.link ? "[x]" : "";
 
