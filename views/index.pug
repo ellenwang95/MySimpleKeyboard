@@ -3,10 +3,15 @@ html(lang='en')
   head
     meta(charset='UTF-8')
     link(rel='stylesheet', type='text/css', href='/css/index.css')
-    // script(src='/js/index.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='https://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/js/index.js')
     title My Keyboard
   body
     .centertext
-      p#dynamictext Hello!
+      p#dynamictext
       p
         a#dynamiclink(href='#', target='_blank')
+
+  input#hiddeninput(type='hidden', value=word)

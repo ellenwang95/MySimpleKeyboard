@@ -10,7 +10,7 @@ function todaysDate() {
 	return dd+'/'+mm+'/'+yyyy;
 }
 
-var add = function(word, text, link) {
+var add = function(keycode, word, text, link) {
 	//to contentdb
 	word = word.toLowerCase();
 	var value = {
@@ -21,20 +21,19 @@ var add = function(word, text, link) {
 	};
 	contentdb.put(word, value, function (err) {
 		if (err) return console.log('some I/O error in contentdb AH!', err);
-		console.log("Added to contentdb word: " + word + "with value: ", value);
+		console.log("Added to contentdb word: " + word + " with value: ", value);
 	});
 
 	//to mapdb 
-	var letter = word.charAt(0);
-	existingRelateds = getRelated(letter, function (value) {
+	existingRelateds = getRelated(keycode, function (value) {
 		var relateds = [ word ];  
 		if(value.hasOwnProperty("relateds")) {
 			relateds = value.relateds; 
 			relateds.push(word);  
 		}
-		mapdb.put(letter, relateds, function (err) {
+		mapdb.put(keycode, relateds, function (err) {
 			if (err) return console.log('some I/O error in mapdb AHHH!', err);
-			console.log("Added in mapdb word: " + word + " to list: ", letter);
+			console.log("Added in mapdb word: " + word + " to list: ", keycode);
 		});
 	});
 }
@@ -53,34 +52,45 @@ var getContent = function(word, callback) {
 	});
 }
 
-var getRelated = function(letter, callback) {
-	letter = letter.toLowerCase();
-	mapdb.get(letter, function (err, value) {
+var getRelated = function(keycode, callback) {
+	mapdb.get(keycode, function (err, value) {
 		if (err) {
-			console.log("Letter mapping not found: " + letter);
+			console.log("Letter mapping not found: " + keycode);
 			callback({error: true});
 		} else {
-			console.log("Found letter: ", letter);
+			console.log("Found keycode: ", keycode);
 			callback(value); //use retrieved value
 		}
 	});
 }
 
-var printReadStream = function() {
+var printContentReadStream = function() {
 	contentdb.createReadStream({  
 	  limit     : 100           // maximum number of entries to read
 	  , keys      : true          // see db.createKeyStream()
 	  , values    : true          // see db.createValueStream()
-	}).on('data', function (data) {
-	      // console.log("key:", data.key);
-	      // console.log("value:", data.value);
-	    });
+	}).on('data', function (contentdata) {
+	      console.log("key:", contentdata.key);
+	      console.log("value:", contentdata.value);
+	});
+}
+
+var printMapReadStream = function() {
+	mapdb.createReadStream({
+		 limit     : 100           // maximum number of entries to read
+	  , keys      : true          // see db.createKeyStream()
+	  , values    : true          // see db.createValueStream()
+	}).on('data', function (mapdata) {
+	      console.log("key:", mapdata.key);
+	      console.log("value:", mapdata.value);
+	});
 }
 
 module.exports = {
   add: add,
   getContent: getContent,
   getRelated: getRelated,
-  printReadStream: printReadStream
+  printContentReadStream: printContentReadStream,
+  printMapReadStream: printMapReadStream
 };
 
