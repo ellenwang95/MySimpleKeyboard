@@ -1,7 +1,15 @@
 var levelup = require('levelup');
-var contentdb = levelup('db/keyboardcontent', {valueEncoding : 'json'});
-var mapdb = levelup('db/keyboardmap', {valueEncoding : 'json'});
+var db = levelup('db/mykeyboard', {valueEncoding : 'json'});
 
+/**
+8: [ { word: ew
+			text: "" 
+			link: ""
+			date: ...},
+	 { word: edu ... } ]
+
+10: [ .. ]
+**/ 
 function todaysDate() {
 	var today = new Date();
 	var dd = today.getDate();
@@ -10,52 +18,10 @@ function todaysDate() {
 	return dd+'/'+mm+'/'+yyyy;
 }
 
-var add = function(keycode, word, text, link) {
-	//to contentdb
-	word = word.toLowerCase();
-	var value = {
-		word: word,
-		text: text,
-		link: link,
-		date: todaysDate()
-	};
-	contentdb.put(word, value, function (err) {
-		if (err) return console.log('some I/O error in contentdb AH!', err);
-		console.log("Added to contentdb word: " + word + " with value: ", value);
-	});
-
-	//to mapdb 
-	existingRelateds = getRelated(keycode, function (value) {
-		var relateds = [ word ];  
-		if(value.hasOwnProperty("relateds")) {
-			relateds = value.relateds; 
-			relateds.push(word);  
-		}
-		mapdb.put(keycode, relateds, function (err) {
-			if (err) return console.log('some I/O error in mapdb AHHH!', err);
-			console.log("Added in mapdb word: " + word + " to list: ", keycode);
-		});
-	});
-}
-
-var getContent = function(word, callback) {
-	word = word.toLowerCase();
-	contentdb.get(word, function (err, value) {
+var get = function(keycode, callback) {
+	db.get(keycode, function (err, value) {
 		if (err) {
-			console.log("Word not found: " + word);
-			callback({ error: true });
-		} else {
-			console.log("Found word: ", word);
-			// console.log("Value: ", value);
-			callback(value); //use retrieved value
-		}	
-	});
-}
-
-var getRelated = function(keycode, callback) {
-	mapdb.get(keycode, function (err, value) {
-		if (err) {
-			console.log("Letter mapping not found: " + keycode);
+			console.log("Keycode mapping not found: " + keycode);
 			callback({error: true});
 		} else {
 			console.log("Found keycode: ", keycode);
@@ -64,33 +30,84 @@ var getRelated = function(keycode, callback) {
 	});
 }
 
-var printContentReadStream = function() {
-	contentdb.createReadStream({  
-	  limit     : 100           // maximum number of entries to read
-	  , keys      : true          // see db.createKeyStream()
-	  , values    : true          // see db.createValueStream()
-	}).on('data', function (contentdata) {
-	      console.log("key:", contentdata.key);
-	      console.log("value:", contentdata.value);
+var add = function(keycode, word, text, link) {
+	word = word.toLowerCase();
+	var entry = {
+		word: word,
+		text: text,
+		link: link,
+		date: todaysDate()
+	};
+		
+	get(keycode, function (value) {
+		var words = [ entry ];
+		if(!value.hasOwnProperty("error")) {
+			words = value; 
+			words.push(entry);
+		}
+		db.put(keycode, words, function (err) {
+			if (err) return console.log('some I/O error in db!!!', err);
+			console.log("Added word: " + word + " to list: ", keycode);
+		});
 	});
 }
 
-var printMapReadStream = function() {
-	mapdb.createReadStream({
-		 limit     : 100           // maximum number of entries to read
+var update = function(keycode, word, newtext, newlink) {
+	word = word.toLowerCase();
+
+	get(keycode, function (value) {
+		var words = value; 
+		for (i in words) {
+			var entry = words[i];
+			if(entry.word == word) {
+				entry.text = newtext;
+				entry.link = newlink;
+				entry.date = todaysDate();
+				break;
+			}
+		}
+		db.put(keycode, words, function (err) {
+			if (err) return console.log('some I/O error in db!!!', err);
+			console.log("Updated word: " + word + " in list: ", keycode);
+		});
+	});
+}
+
+var del = function(keycode, word) {
+	word = word.toLowerCase();
+
+	get(keycode, function (value) {
+		var words = value; 
+		for (i in words) {
+			var entry = words[i];
+			if(entry.word == word) {
+				words.splice(i, 1);
+				break;
+			}
+		}
+		db.put(keycode, words, function (err) {
+			if (err) return console.log('some I/O error in db!!!', err);
+			console.log("Deleted word: " + word + " in list: ", keycode);
+		});
+	});
+}
+
+var printReadStream = function() {
+	db.createReadStream({  
+	  limit     : 100           // maximum number of entries to read
 	  , keys      : true          // see db.createKeyStream()
 	  , values    : true          // see db.createValueStream()
-	}).on('data', function (mapdata) {
-	      console.log("key:", mapdata.key);
-	      console.log("value:", mapdata.value);
+	}).on('data', function (data) {
+	      console.log("key:", data.key);
+	      console.log("value:", data.value);
 	});
 }
 
 module.exports = {
+  get: get,
   add: add,
-  getContent: getContent,
-  getRelated: getRelated,
-  printContentReadStream: printContentReadStream,
-  printMapReadStream: printMapReadStream
+  update: update,
+  del: del,
+  printReadStream: printReadStream
 };
 

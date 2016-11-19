@@ -11,6 +11,10 @@ var link = null;
 db.add(keycode, word, text, link); 
 **/
 
+// var keycode = 69;
+// var word = "ew";
+// var text = "My full name is Ellen Wang (E.W., e.w., ew.. you get it).";
+// var link = null; 
 
-db.printContentReadStream();
-db.printMapReadStream();
+// db.add(keycode, word, text, link); 
+

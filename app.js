@@ -20,13 +20,8 @@ app.use('/', routes);
 
 //listen for requested words
 io.on('connection', function (socket) {
-	socket.on('loaded word', function (word) {
-		db.getContent(word, function (value) {
-			socket.emit('got entry', value);
-		});
-	});
 	socket.on('keydown', function(keycode) {
-		db.getRelated(keycode, function (value) {
+		db.get(keycode, function (value) {
 			socket.emit('update', value);
 		})
 	})
