@@ -1,0 +1,34 @@
+KEY: ;
+VALUE: {"firstline":"'A semicolon is used when an author could’ve ended a sentence but chose not to. You are the author and the sentence is your life.'","link":"http://www.projectsemicolon.org/","maincontent":"You never know what someone could be going through. Everyone has their own pains. Try to practice compassion; see others without the prejudice of your own strengths and weaknesses.","date":"2/10/2016"}
+KEY: control
+VALUE: {"firstline":"Procrastinating is bad. Procrastination is the devil!","link":"https://www.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator?language=en","maincontent":"Think about the you an hour/2 hours/a day from now, if you keep doing what you're doing. Will you be glad to have spent your time the way you did? I mean, I could have slept like a normal person and now it's 1AM and I still haven't started.","date":"2/10/2016"}
+KEY: edu
+VALUE: {"firstline":"Software Engineering, University of Waterloo, Class of 2018. Currently on exchange in Denmark (DTU)! ","link":"","maincontent":"","date":"1/10/2016"}
+KEY: escape
+VALUE: {"firstline":"... the chaos. ","link":"","maincontent":"Make some time to be away from everything. Clear your mind. Enjoy your own company. :) ","date":"2/10/2016"}
+KEY: ew
+VALUE: {"firstline":"Hi! My full name is Ellen Wang (E.W., e.w., ew.. you get it). ","link":"","maincontent":"","date":"1/10/2016"}
+KEY: friendship
+VALUE: {"firstline":"\"to have close, supportive friends”","link":"","maincontent":"So. Funny story, I actually had <i>Monogamy</i> as my value instead of Friendship. This is because the definition in the <b>inkandfeet</b> module was <i>\"to have one close, loving relationship”</i> (nothing to do with number of sexual partners). What I meant was, having one core friendship in my life.","date":"4/10/2016"}
+KEY: genuineness
+VALUE: {"firstline":"\"to act in a manner that is true to who I am\"","link":"","maincontent":"I realized at some point that this is not as easy as it sounds. I wasn't even aware of how bad I was at this until I heard someone else's opinion of my values. The closer in line my personal values are with how I act, the happier I become. As with everything, work in progress. ","date":"4/10/2016"}
+KEY: hello
+VALUE: {"firstline":"<b>it's me...</b> </br> I mean, how are you","link":"","maincontent":"","date":"1/10/2016"}
+KEY: independence
+VALUE: {"firstline":"\"to be free from dependence on others\"","link":"","maincontent":"Self-sufficiency. There's a certain stability in knowing that you can manage on your own, no matter the task at hand.","date":"4/10/2016"}
+KEY: mindfulness
+VALUE: {"firstline":"\"to live conscious and mindful of the present moment\"","link":"","maincontent":"Being aware of how I'm feeling, and what I'm projecting to the people around me. Thinking less about the past and the future, more of the present. Trying to. ","date":"4/10/2016"}
+KEY: quit
+VALUE: {"firstline":"<b>Don't give up!! Persevere!<b>\r\n","link":"","maincontent":"You can do it, you just have to put your mind to it. Hard work pays off. ","date":"2/10/2016"}
+KEY: shift
+VALUE: {"firstline":".. your mindset from time to time. ","link":"http://www.storypeople.com/2015/01/20/clear-directions/","maincontent":"Let yourself be enlightened. ","date":"2/10/2016"}
+KEY: sick
+VALUE: {"firstline":"Overcome with an oversized sweater, scarf, and plenty of water. All good. ","link":"","maincontent":"","date":"1/10/2016"}
+KEY: solitude
+VALUE: {"firstline":"\"to have time and space where I can be apart from others\"","link":"","maincontent":"The introvert struggles are real. ","date":"4/10/2016"}
+KEY: v
+VALUE: {"firstline":"There's this Korean Pop group...","link":"https://en.wikipedia.org/wiki/BTS_(band)","maincontent":"Korean pop idols tend to have one-letter stage names. 'V' is a direct train of thought to my favourite member in BTS. You should check them out. I even linked you. ","date":"1/10/2016"}
+KEY: values
+VALUE: {"firstline":"Have you heard of Steven from Ink and Feet? ","link":"https://inkandfeet.com","maincontent":"Yes. Just YES! Recently came across his masterclass and tried out the first module. Also saw that he made an app called \"Mindful Browsing\". Instant install. So here's my top 5 (in no particular order) after going through his module: <b>Genuineness, Independence, Friendship, Solitude, Mindfulness<b>.","date":"4/10/2016"}
+KEY: yo
+VALUE: {"firstline":"What's uuupppp","link":"","maincontent":"","date":"1/10/2016"}
