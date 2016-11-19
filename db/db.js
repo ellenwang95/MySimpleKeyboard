@@ -30,12 +30,13 @@ var get = function(keycode, callback) {
 	});
 }
 
-var add = function(keycode, word, text, link) {
+var add = function(keycode, word, text, link, more) {
 	word = word.toLowerCase();
 	var entry = {
 		word: word,
 		text: text,
 		link: link,
+		more: more,
 		date: todaysDate()
 	};
 		
@@ -52,19 +53,26 @@ var add = function(keycode, word, text, link) {
 	});
 }
 
-var update = function(keycode, word, newtext, newlink) {
+var update = function(keycode, word, newtext, newlink, newmore) {
 	word = word.toLowerCase();
 
 	get(keycode, function (value) {
 		var words = value; 
+		var updated = false;
 		for (i in words) {
 			var entry = words[i];
 			if(entry.word == word) {
 				entry.text = newtext;
 				entry.link = newlink;
+				entry.more = newmore;
 				entry.date = todaysDate();
+				updated = true;
 				break;
 			}
+		}
+		if (!updated) {
+			console.log("Could not find word to update: ", word);
+			return;
 		}
 		db.put(keycode, words, function (err) {
 			if (err) return console.log('some I/O error in db!!!', err);
@@ -89,6 +97,13 @@ var del = function(keycode, word) {
 			if (err) return console.log('some I/O error in db!!!', err);
 			console.log("Deleted word: " + word + " in list: ", keycode);
 		});
+	});
+}
+
+var del = function(keycode) {
+	db.del(keycode, function (err) {
+		if (err) return console.log('some I/O error AH!', err);
+		console.log("Deleted: ", keycode);
 	});
 }
 

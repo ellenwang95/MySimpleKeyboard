@@ -21,6 +21,10 @@ app.use('/', routes);
 //listen for requested words
 io.on('connection', function (socket) {
 	socket.on('keydown', function(keycode) {
+		if(keycode == 13) { //enter
+			socket.emit('update', {more: true});
+			return;
+		}
 		db.get(keycode, function (value) {
 			socket.emit('update', value);
 		})
