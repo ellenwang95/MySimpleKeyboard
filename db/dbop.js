@@ -11,5 +11,6 @@ var link = null;
 db.add(keycode, word, text, link); 
 **/
 
+
 db.printContentReadStream();
 db.printMapReadStream();

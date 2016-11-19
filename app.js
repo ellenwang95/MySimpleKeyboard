@@ -25,6 +25,11 @@ io.on('connection', function (socket) {
 			socket.emit('got entry', value);
 		});
 	});
+	socket.on('keydown', function(keycode) {
+		db.getRelated(keycode, function (value) {
+			socket.emit('update', value);
+		})
+	})
 });
 
 server.listen(3000);

@@ -10,18 +10,41 @@ window.onload = function () {
 	}
 }
 
+window.addEventListener("keydown", update, false);
+
+function update(e) {
+	if (!e.metaKey ) {
+      e.preventDefault();
+    }
+    socket.emit('keydown', e.keyCode); 
+}
+
 //listen for socket events from server
+socket.on('update', function (retrievedentry) {
+	if(error(retrievedentry)) {
+		return;
+	}
+	window.location.href = "/" + retrievedentry[0];
+});
 socket.on('got entry', function (retrievedentry) {
-	var text = document.getElementById("dynamictext"); 
-    var link = document.getElementById("dynamiclink");
-	
-	if(retrievedentry.hasOwnProperty("error")) {
- 		text.innerHTML = "oh didn't get that one yet";
-      	link.innerHTML = "";
-      	link.href = "";	
+	if(error(retrievedentry)) {
       	return;
 	}
-	text.innerHTML = retrievedentry.text; 
-	link.innerHTML = retrievedentry.link ? "[x]" : "";
-    link.href = retrievedentry.link ? retrievedentry.link : "";
+	$("#dynamictext, #dynamiclink").fadeOut().promise().done(function() {
+		var linkhref = retrievedentry.link ? retrievedentry.link : "";
+        var linktext = retrievedentry.link ? "[x]" : "";
+
+        $("#dynamictext").html(retrievedentry.text).fadeIn(); 
+        $("#dynamiclink").prop('href', linkhref); 
+        $("#dynamiclink").text(linktext).fadeIn();
+    }); 
 });
+
+var error = function(retrievedentry) {
+	if(retrievedentry.hasOwnProperty("error")) {
+		window.location.href = "/err";
+      	return true;
+	}
+	return false;
+}
+
