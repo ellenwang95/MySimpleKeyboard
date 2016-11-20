@@ -12,11 +12,11 @@ var more = "";
 db.add(keycode, word, text, link); 
 **/
 
-var keycode = 87;
-var word = "water";
-var text = "(Water) (Water)";
-var link = "http://www.setnode.com/blog/university-of-waterloo-cheers/";
-var more = "LOO LOO LOO";
+var keycode = 56;
+var word = "8";
+var text = "My birthdate! :D";
+var link = "";
+var more = "";
 
 db.add(keycode, word, text, link, more); 
 
