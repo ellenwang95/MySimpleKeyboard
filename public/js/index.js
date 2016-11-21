@@ -57,7 +57,7 @@ var updatePage = function(word, text, linkhref, linktext, more) {
 		word = "<b>[ " + word + " ]<b/> <br/>";
 	}
 	$("#word").html(word);
-	$("#text").html(text);
+	$("#text").html(text + "&nbsp");
 	$("#link").prop('href', linkhref); 
     $("#link").text(linktext);
     $("#hiddeninput").val(more);

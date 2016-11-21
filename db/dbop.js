@@ -12,11 +12,12 @@ var more = "";
 db.add(keycode, word, text, link); 
 **/
 
-var keycode = 56;
-var word = "8";
-var text = "My birthdate! :D";
+var keycode = 69;
+var word = "ew";
+var text = "My full name is Ellen Wang.";
 var link = "";
-var more = "";
+var more = "E.W., e.w., ew.. you get it.";
 
-db.add(keycode, word, text, link, more); 
+db.update(keycode, word, text, link, more); 
 
+// db.get(75, function (value) { console.log(value); });
